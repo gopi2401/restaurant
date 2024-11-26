@@ -1,0 +1,16 @@
+<div class="w-full min-h-screen bg-gradient-to-tr from-indigo-600 via-indigo-700 to-violet-800">
+    <div class="flex flex-col gap-4 items-center w-full h-full p-3">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+            Orders
+        </h1>
+        <div>total: {{items.length}} </div>
+        <div class="w-full grid gap-3 md:grid-cols-3 md:gap-4">
+            @for (item of items; track item.status) {
+            <app-order-card [title]="item.title" [product]="item.product" [quantity]="item.quantity"
+                [price]="item.price" [status]="item.status" />
+            } @empty {
+            <li>There are no items.</li>
+            }
+        </div>
+    </div>
+</div>
