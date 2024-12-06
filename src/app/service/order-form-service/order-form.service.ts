@@ -1,29 +1,24 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ComponentFactoryResolver,
-  Inject,
-  Injectable,
-  Injector,
-  TemplateRef,
-} from '@angular/core';
-import { Subject } from 'rxjs';
-import { AddOrderComponent } from './add-order.component';
-// import { ModalComponent } from '../components/modal/modal.component';
+import { ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
+import { OrderFormComponent } from '../../component/order-form/order-form/order-form.component';
+import { Observable, Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddOrderService {
+export class OrderFormService {
   private modalNotifier?: Subject<string>;
   constructor(
     private resolver: ComponentFactoryResolver,
     private injector: Injector,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private httpClient: HttpClient
   ) { }
 
   open() {
     const AddOrderComponentFactory = this.resolver.resolveComponentFactory(
-      AddOrderComponent
+      OrderFormComponent
     );
     const modalComponent = AddOrderComponentFactory.create(this.injector);
 
@@ -44,5 +39,8 @@ export class AddOrderService {
   submitModal() {
     this.modalNotifier?.next('confirm');
     this.closeModal();
+  }
+  createOrder(payload: any): Observable<any> {
+    return this.httpClient.post("http://localhost:3000/v1/order", payload)
   }
 }

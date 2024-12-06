@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { Component, HostBinding } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -9,5 +10,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './side-bar.component.scss'
 })
 export class SideBarComponent {
-
+  public sidebarShow: boolean = false;
 }

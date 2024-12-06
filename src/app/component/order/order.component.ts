@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderCardComponent } from "../order-card/order-card.component";
+import { OrderService } from '../../service/order-service/order.service';
 
 @Component({
   selector: 'app-order',
@@ -8,34 +9,15 @@ import { OrderCardComponent } from "../order-card/order-card.component";
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
-export class OrderComponent {
+export class OrderComponent implements OnInit {
+  Orderitems: any
 
-  items = [
-    {
-      title: "a",
-      product: "string",
-      quantity: 2,
-      price: 88,
-      status: "pending"
-    }, {
-      title: "b",
-      product: "string",
-      quantity: 1,
-      price: 882,
-      status: "delivered"
-    },
-    {
-      title: "b",
-      product: "string",
-      quantity: 1,
-      price: 882,
-      status: "delivered"
-    }, {
-      title: "b",
-      product: "string",
-      quantity: 1,
-      price: 882,
-      status: "delivered"
-    }
-  ]
+  constructor(private orderService: OrderService) { }
+
+  ngOnInit(): void {
+    this.orderService.GetOrders().subscribe(data => {
+      this.Orderitems = data.data;
+    })
+  }
+
 }
