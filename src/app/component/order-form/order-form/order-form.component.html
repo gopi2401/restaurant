@@ -1,5 +1,5 @@
 <div
-    class=" overflow-y-auto overflow-x-hidden fixed z-50 flex backdrop-blur-sm bg-white/30 justify-center items-center w-full inset-0 h-[calc(100%)] max-h-full">
+    class=" overflow-y-auto overflow-x-hidden fixed z-50 flex backdrop-blur-sm bg-white/20 justify-center items-center w-full inset-0 h-[calc(100%)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow-md dark:bg-gray-700">
@@ -44,8 +44,8 @@
                                         <option>{{item.name}}</option>
                                         }
                                     </datalist> -->
-                                    <select formControlName="name" for="name" id="name" #option
-                                        (change)="selectedMenu(option.value)" aria-placeholder=""
+                                    <select formControlName="menu_id" for="name" id="name" #option
+                                        (change)="selectedMenu(option.value,i)" aria-placeholder=""
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                         <!-- <option selected="">Select menu</option> -->
                                         @for (item of menuItems; track $index) {
@@ -54,8 +54,9 @@
                                     </select>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <div class=""><span class="mr-0.5">22</span><span
-                                            class="text-xs text-gray-500">price</span>
+                                    <div class="flex flex-col items-center"><span
+                                            class="mr-0.5">{{MenuFA.controls.at(i).controls['menu_price'].value||0}}</span><span
+                                            class="text-xs text-gray-500">Price</span>
                                     </div>
                                     <div class="flex items-center">
                                         <button (click)="quantityChange(-1,i)"
@@ -69,10 +70,10 @@
                                             </svg>
                                         </button>
                                         <div class="ms-2">
-                                            <input #quantity formControlName="quantity" id="quantity" for="quantity"
-                                                type="number"
+                                            <input formControlName="menu_quantity" id="menu_quantity"
+                                                for="menu_quantity" type="number"
                                                 class="bg-gray-50 w-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-1 py-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="1" required />
+                                                required />
                                         </div>
                                         <button (click)="quantityChange(1,i)"
                                             class="inline-flex items-center justify-center h-6 w-6 p-1 ms-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-full focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
@@ -85,7 +86,10 @@
                                             </svg>
                                         </button>
                                     </div>
-                                    <div><span class="mr-0.5">22</span><span class="text-xs text-gray-500">amount</span>
+                                    <div class="flex flex-col items-center"><span
+                                            class="mr-0.5">{{MenuFA.controls.at(i).controls['menu_price'].value
+                                            *MenuFA.controls.at(i).controls['menu_quantity'].value}}</span><span
+                                            class="text-xs text-gray-500">Amount</span>
                                     </div>
                                 </div>
 
@@ -108,10 +112,12 @@
                                 clip-rule="evenodd"></path>
                         </svg><span class="sr-only">add menu</span></button>
                     <div class="col-span-2 sm:col-span-1 flex flex-row justify-around items-center py-4 px-1">
-                        <div class=""> <input disabled value="1" class="font-medium bg-transparent w-2"><span
+                        <div class="flex flex-row items-center gap-1">
+                            <span class="font-medium">{{orderQuantity}}</span><span
                                 class="text-xs text-gray-800">Qty</span>
                         </div>
-                        <div class=""> <input value="22" formControlName="price" class="font-medium bg-transparent w-5">
+                        <div class="flex flex-row items-center gap-1">
+                            <span class="font-medium">{{orderAmount}}</span>
                             <span class="text-xs text-gray-800">Amt</span>
                         </div>
                     </div>

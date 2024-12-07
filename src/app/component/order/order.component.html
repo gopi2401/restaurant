@@ -3,14 +3,21 @@
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
             Orders
         </h1>
-        <div>total: {{Orderitems.length}} </div>
+        <div>total: </div>
         <div class="w-full grid gap-3 md:grid-cols-3 md:gap-4">
-            @for (item of Orderitems; track item.status) {
-            <app-order-card [title]="item.title" [product]="item.product" [quantity]="item.quantity"
-                [price]="item.price" [status]="item.status" />
+            @for (item of Orders; track $index) {
+            <app-order-card [id]="item.id" [title]="item.customer_name" [product]="item.product"
+                [quantity]="item.quantity" [price]="item.price" [status]="item.status" />
             } @empty {
             <li>There are no items.</li>
             }
         </div>
+    </div>
+    <!-- Order-Button -->
+    <div class="fixed bottom-10 right-8 md:bottom-16 md:right-16">
+        <button (click)="openModal()"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">
+            Order
+        </button>
     </div>
 </div>

@@ -9,7 +9,11 @@ export class OrderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  GetOrders(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/v1/order')
+  GetOrderAndItem(): Observable<any> {
+    return this.httpClient.get('http://localhost:3000/v1/orderanditems')
+  }
+
+  orderUpdate(id: number, payload: any): Observable<any> {
+    return this.httpClient.put(`http://localhost:3000/v1/order/${id}`, payload)
   }
 }

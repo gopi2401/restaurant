@@ -34,10 +34,14 @@ export class OrderFormComponent {
   }
 
   submit(): void {
+    this.orderFG.controls.price.setValue(this.orderAmount);
+    this.orderFG.controls.quantity.setValue(this.orderQuantity)
     console.log(this.orderFG.value)
-    // this.orderFormService.createOrder()
-    // this.elementRef.nativeElement.remove();
-    // this.submitEvent.emit();
+    this.orderFormService.createOrder(this.orderFG.value).subscribe(data => {
+      console.log(data)
+    })
+    this.elementRef.nativeElement.remove();
+    this.submitEvent.emit();
   }
   MenuFA = new FormArray([this.newMenuFG]);
 
@@ -45,8 +49,8 @@ export class OrderFormComponent {
   orderFG = new FormGroup({
     customer_name: new FormControl(null),
     menus: this.MenuFA,
-    quantity: new FormControl(1),
-    price: new FormControl(0)
+    quantity: new FormControl(this.orderQuantity),
+    price: new FormControl(this.orderAmount)
   });
 
   get menuArrayFGControls(): FormGroup[] {
@@ -55,11 +59,18 @@ export class OrderFormComponent {
 
   get newMenuFG(): FormGroup {
     return new FormGroup({
-      menu_id: null,
+      menu_id: new FormControl(null),
       menu_name: new FormControl(null),
-      menu_price: null,
-      menu_quantity: new FormControl(1),
+      menu_price: new FormControl(null),
+      menu_quantity: new FormControl(null),
     });
+  }
+
+  get orderAmount() {
+    return this.MenuFA.controls.reduce((pre, cur) => (pre + cur.controls['menu_price'].value * cur.controls['menu_quantity'].value), 0);
+  }
+  get orderQuantity() {
+    return this.MenuFA.controls.reduce((pre, cur) => (pre + cur.controls['menu_quantity'].value), 0);
   }
 
   addMenuFG(): void {
@@ -71,15 +82,23 @@ export class OrderFormComponent {
     this.MenuFA.removeAt(index);
     this.changeDetect()
   }
-  
-  selectedMenu(ss: any) {
-    console.log(ss)
-    this.menu = ss;
+
+  selectedMenu(id: any, index: number) {
+    const menu = this.menuItems.find((item) => (item.id == id));
+    console.log(menu)
+    this.MenuFA.controls.at(index).controls['menu_id'].setValue(menu.id);
+    this.MenuFA.controls.at(index).controls['menu_name'].setValue(menu.name);
+    this.MenuFA.controls.at(index).controls['menu_price'].setValue(menu.price);
+    this.MenuFA.controls.at(index).controls['menu_quantity'].setValue(1);
+    this.changeDetect()
   }
 
   quantityChange(change: number, index: number) {
-    const value = this.MenuFA.controls.at(index).controls['quantity'].value
-    if (change + value > 0) { this.MenuFA.controls.at(index).controls['quantity'].setValue(change + parseInt(value)); }
+    const value = this.MenuFA.controls.at(index).controls['menu_quantity'].value
+    if (change + value > 0) {
+      this.MenuFA.controls.at(index).controls['menu_quantity'].setValue(change + parseInt(value));
+      this.changeDetect()
+    }
   }
 
   changeDetect() {
