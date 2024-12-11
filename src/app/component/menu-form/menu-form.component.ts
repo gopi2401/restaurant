@@ -23,18 +23,16 @@ export class MenuFormComponent implements OnInit {
     this.elementRef.nativeElement.remove();
     this.closeEvent.emit();
   }
-  exampleMethodChild() {
-    this.exampleOutput.emit('qwertyuiop')
-  }
+
   submit(): void {
     this.menuFG.markAllAsTouched();
     if (this.menuFG.valid) {
       this.elementRef.nativeElement.remove();
       this.submitEvent.emit();
-      console.log('Form is valid');
+      console.log('Form is valid',this.data);
       console.log(this.menuFG.getRawValue());
       let menu = this.menuFG.value
-      if (this.data.id) {
+      if (this.data?.id) {
         this.menuFormService.editmenu(this.data.id, menu).subscribe(data => {
           console.log(data)
         });

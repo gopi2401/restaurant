@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { OrderService } from '../../service/order-service/order.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-order-card',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './order-card.component.html',
   styleUrl: './order-card.component.scss'
 })
