@@ -22,10 +22,10 @@ export class OrderFormComponent {
     private orderFormService: OrderFormService,
     private menuService: MenuService
   ) {
-    this.menuService.getmenus().subscribe(data => {
-      this.menuItems = data.data
-      this.changeDetect();
-    })
+    // this.menuService.getmenus().subscribe(data => {
+    //   this.menuItems = data.data
+    //   this.changeDetect();
+    // })
   }
 
   close(): void {

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MenuService } from '../../service/menu-service/menu.service';
 import { MenuFormService } from '../../service/menu-form-service/menu-form.service';
 import { ConfirmAlertComponent } from "../confirm-alert/confirm-alert/confirm-alert.component";
 import { MenuFormComponent } from "../menu-form/menu-form.component";
-import { TestComponent } from "../test/test/test.component";
 
 @Component({
   selector: 'app-menu',
@@ -13,33 +12,38 @@ import { TestComponent } from "../test/test/test.component";
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
+
+  menusData: any[] = [];
   ConfirmAlert: boolean = false;
   editModel: boolean = false;
   editData: { id: number, name: string, price: number, pic_url: string };
   deleteId: number;
-  menusData: any[];
-  exampleParent: string
-  constructor(private menuService: MenuService, private menuFormService: MenuFormService) { }
+
+  constructor(public menuService: MenuService, private menuFormService: MenuFormService, private changeDetectorRef: ChangeDetectorRef) {
+    this.menuService.getMenusData.subscribe(data => this.menusData = data);
+  }
 
   ngOnInit() {
-    this.menuService.getmenus().subscribe((data) => {
-      console.log(data.message)
-      this.menusData = data.data;
+    this.menuService.getmenus().subscribe(data => {
+      this.menuService.setMenuData(data.data);
     })
   }
-  exampleMethodParent($event) {
-    this.exampleParent = $event;
+
+  menuDataReceive(data: any) {
+    var index = this.menuService.getMenu.findIndex((item) => item.id === data.id);
+    if (index !== -1) { this.menuService.getMenu[index] = data; };
   }
-  openModal() {
+
+  openMenuModal() {
     this.menuFormService
       .open()
       .subscribe((action) => {
-        console.log('modalAction', action);
       });
   }
+
   deleteMenu() {
-    this.menuFormService.deletemenu(this.deleteId).subscribe(data => {
-      console.log(data);
+    this.menuService.deletemenu(this.deleteId).subscribe(data => {
+      this.deleteId = null
       this.ConfirmAlert = false;
     })
   };
@@ -50,5 +54,9 @@ export class MenuComponent implements OnInit {
 
   public editModal() {
     this.editModel = !this.editModel
+  }
+
+  changeDetect() {
+    this.changeDetectorRef.detectChanges()
   }
 }

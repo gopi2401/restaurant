@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { OrderCardComponent } from "../order-card/order-card.component";
 import { OrderService } from '../../service/order-service/order.service';
 import { OrderFormService } from '../../service/order-form-service/order-form.service';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [OrderCardComponent],
+  imports: [OrderCardComponent, NgbDropdownModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
