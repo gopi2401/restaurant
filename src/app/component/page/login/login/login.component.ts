@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Title } from "@angular/platform-browser";
-import { LoginService } from '../service/login-service/login.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+
+import { LoginService } from '../../../../service/login-service/login.service';
 
 @Component({
   selector: 'app-login',
@@ -32,17 +32,11 @@ export class LoginComponent {
     if (phone && password) {
       this.LoginService.loginUser({ phone, password }).subscribe((data) => {
         if (data) {
-          localStorage.setItem('authToken', data.authToken);
-          localStorage.setItem('user', data.data);
+          localStorage.setItem('accessToken', data.accessToken);
+          localStorage.setItem('user', JSON.stringify(data.data));
           this.router.navigate(['/dashboard']);
         }
       });
     }
-  }
-
-  getAPIData() {
-    this.LoginService.getUserList().subscribe(data => {
-      console.log(data)
-    })
   }
 }

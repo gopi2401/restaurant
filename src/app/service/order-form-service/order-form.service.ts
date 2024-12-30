@@ -2,7 +2,6 @@ import { DOCUMENT } from '@angular/common';
 import { ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { OrderFormComponent } from '../../component/order-form/order-form/order-form.component';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,7 @@ export class OrderFormService {
   constructor(
     private resolver: ComponentFactoryResolver,
     private injector: Injector,
-    @Inject(DOCUMENT) private document: Document,
-    private httpClient: HttpClient
+    @Inject(DOCUMENT) private document: Document
   ) { }
 
   open() {
@@ -40,7 +38,5 @@ export class OrderFormService {
     this.modalNotifier?.next('confirm');
     this.closeModal();
   }
-  createOrder(payload: any): Observable<any> {
-    return this.httpClient.post("http://localhost:3000/v1/order", payload)
-  }
+
 }

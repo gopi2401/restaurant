@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output 
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderFormService } from '../../../service/order-form-service/order-form.service';
 import { MenuService } from '../../../service/menu-service/menu.service';
+import { OrderService } from '../../../service/order-service/order.service';
 
 @Component({
   selector: 'app-order-form',
@@ -20,12 +21,13 @@ export class OrderFormComponent {
   constructor(private elementRef: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
     private orderFormService: OrderFormService,
+    private orderService: OrderService,
     private menuService: MenuService
   ) {
-    // this.menuService.getmenus().subscribe(data => {
-    //   this.menuItems = data.data
-    //   this.changeDetect();
-    // })
+    this.menuService.getmenus().subscribe(data => {
+      this.menuItems = data.data
+      this.changeDetect();
+    })
   }
 
   close(): void {
@@ -37,14 +39,14 @@ export class OrderFormComponent {
     this.orderFG.controls.price.setValue(this.orderAmount);
     this.orderFG.controls.quantity.setValue(this.orderQuantity)
     console.log(this.orderFG.value)
-    this.orderFormService.createOrder(this.orderFG.value).subscribe(data => {
+    this.orderService.createOrder(this.orderFG.value).subscribe(data => {
       console.log(data)
     })
     this.elementRef.nativeElement.remove();
     this.submitEvent.emit();
   }
-  MenuFA = new FormArray([this.newMenuFG]);
 
+  MenuFA = new FormArray([this.newMenuFG]);
 
   orderFG = new FormGroup({
     customer_name: new FormControl(null),

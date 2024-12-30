@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderService } from '../../service/order-service/order.service';
 import { NgClass } from '@angular/common';
 
@@ -16,10 +16,14 @@ export class OrderCardComponent {
   @Input() quantity = 1;
   @Input() price = 0;
   @Input() status = "pending";
+
+  @Output() OrderData = new EventEmitter<any>()
+
   constructor(private orderService: OrderService) { }
+
   Delivered(id: number) {
     this.orderService.orderUpdate(id, { status: 'delivered' }).subscribe(data => {
-      console.log(data)
+      console.log(data);
     })
   }
 }

@@ -3,6 +3,7 @@ import { SideBarComponent } from "../side-bar/side-bar.component";
 import { NotificationComponent } from "../notification/notification.component";
 import { Title } from '@angular/platform-browser';
 import { OrderFormService } from '../../service/order-form-service/order-form.service';
+import { DashboardService } from '../../service/dashboard-service/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,8 +13,20 @@ import { OrderFormService } from '../../service/order-form-service/order-form.se
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-  constructor(private title: Title, private orderFormService: OrderFormService) {
+  totalOrder: number
+  totalQuantity: number
+  totalPrice: number
+  constructor(private title: Title, private orderFormService: OrderFormService, private dashboardService: DashboardService) {
     this.title.setTitle('Dashboard-Restaurant');
+    this.dashboardService.getOrderCount().subscribe(data => {
+      this.totalOrder = data.data.orderCount;
+    });
+    this.dashboardService.getOrderQuantity().subscribe(data => {
+      this.totalQuantity = data.data.orderQuantity
+    })
+    this.dashboardService.getOrderPrice().subscribe(data => {
+      this.totalPrice = data.data.orderPrice
+    })
   }
 
   openModal() {

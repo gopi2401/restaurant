@@ -1,27 +1,36 @@
-<section class="bg-white p-3 md:p-6 rounded-lg shadow-md mt-6">
+<!-- this component global css set width 100% -->
+<section class="bg-white p-2 sm:p-6 rounded-lg shadow-md mt-6">
   <h2 class="text-lg font-semibold mb-2 md:mb-4 text-gray-800">Menu List</h2>
-  <div class="md:mb-4 flex w-full justify-end p-4">
+  <!-- <div class="md:mb-4 flex w-full justify-end p-4">
     <button
       (click)="openMenuModal()"
       class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
     >
       Add Menu
     </button>
-  </div>
+  </div> -->
   <div class="overflow-hidden rounded-lg shadow">
-    <table class="min-w-full bg-white">
+    <table class="min-w-full bg-white table-auto">
       <thead class="bg-gray-200">
         <tr>
-          <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+          <th
+            class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+          >
             Image
           </th>
-          <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+          <th
+            class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+          >
             Menu
           </th>
-          <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+          <th
+            class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+          >
             Price
           </th>
-          <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+          <th
+            class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+          >
             Actions
           </th>
         </tr>
@@ -29,19 +38,21 @@
       <tbody class="divide-y divide-gray-200">
         @for (menu of menusData; track $index) {
         <tr class="hover:bg-gray-100">
-          <td class="px-6 py-4">
+          <td class="sm:px-6 sm:py-4">
             <img
               src="{{ menu.pic_url }}"
               alt="Menu Image"
-              class="w-16 h-16 object-cover rounded-md shadow"
+              class="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-md shadow"
             />
           </td>
-          <td class="px-6 py-4 text-gray-800 font-medium">{{ menu.name }}</td>
-          <td class="px-6 py-4 text-gray-800">₹{{ menu.price }}</td>
-          <td class="px-6 py-4">
+          <td class="sm:px-6 sm:py-4 text-gray-800 font-medium">
+            {{ menu.name }}
+          </td>
+          <td class="sm:px-6 sm:py-4 text-gray-800">₹{{ menu.price }}</td>
+          <td class="sm:px-6 sm:py-4">
             <button
               (click)="editModal(); editData = menu"
-              class="flex flex-row items-center font-medium text-yellow-600 dark:text-red-500 hover:underline"
+              class="flex flex-row items-center hover:underline"
             >
               <span
                 class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
@@ -50,7 +61,7 @@
             </button>
             <button
               (click)="deleteModal(); deleteId = menu.id"
-              class="flex flex-row items-center font-medium text-yellow-600 dark:text-red-500 hover:underline"
+              class="flex flex-row items-center hover:underline"
             >
               <span
                 class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"

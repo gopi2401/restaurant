@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { MenuFormComponent } from '../../component/menu-form/menu-form.component';
 import { DOCUMENT } from '@angular/common';
 import { MenuService } from '../menu-service/menu.service';
+import { LoginService } from '../login-service/login.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,8 @@ export class MenuFormService {
         private injector: Injector,
         @Inject(DOCUMENT) private document: Document,
         private httpClient: HttpClient,
-        private menuService: MenuService
+        private menuService: MenuService,
+        private loginService: LoginService
     ) { }
 
     open() {
@@ -52,12 +54,13 @@ export class MenuFormService {
         return this.menuDataReceived;
     }
     createmenu(payload: any): Observable<any> {
-        return this.httpClient.post('http://localhost:3000/v1/menu', payload)
+        const headers = this.loginService.getTokenHeader;
+        return this.httpClient.post('http://localhost:3000/v1/menu', payload, { headers })
     };
 
     editmenu(id: number, payload: any): Observable<any> {
-        return this.httpClient.put(`http://localhost:3000/v1/menu/${id}`, payload)
+        const headers = this.loginService.getTokenHeader;
+        return this.httpClient.put(`http://localhost:3000/v1/menu/${id}`, payload, { headers })
     };
-
 
 }

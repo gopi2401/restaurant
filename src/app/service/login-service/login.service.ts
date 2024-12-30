@@ -1,20 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private httpClient: HttpClient) { }
+  private token = new BehaviorSubject('');
+  getTokenFu = this.token.asObservable();
 
-  getUserList(): Observable<any> {
-    return this.httpClient.get('https://run.mocky.io/v3/b1e35d03-805b-41cd-895d-2990ea5e8f0b')
-
+  constructor(private httpClient: HttpClient, private router: Router) {
+    const data = localStorage.getItem('accessToken');
+    if (data) this.token.next(data);
   }
 
   loginUser(payload: any): Observable<any> {
     return this.httpClient.post('http://localhost:3000/v1/login', payload)
+  }
+
+  logout() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
+  }
+
+  get getToken() {
+    let data
+    this.getTokenFu.subscribe(value => {
+      data = value;
+    })
+    return data;
+  }
+
+  get getTokenHeader() {
+    const token = this.getToken;
+    if (!token) this.router.navigate(['/login']);
+    const headers = {
+      "Authorization": 'Bearer ' + token
+    }
+    return headers;
   }
 }
