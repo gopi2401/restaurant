@@ -38,13 +38,5 @@ export class OrderService {
   orderUpdate(id: number, payload: any): Observable<any> {
     const headers = this.loginService.getTokenHeader;
     return this.httpClient.put<any>(`http://localhost:3000/v1/order/${id}`, payload, { headers });
-    // response.subscribe(data => {
-    //   if (data.message === "Order updated successfully") {
-    //     var index = this.orderDataItems.findIndex((item) => item.id === id);
-    //     const data = this.orderDataItems[index];
-    //     data.status = payload.status;
-    //     if (index !== -1) { this.orderDataItems[index] = data; };
-    //   }
-    // });
   }
 }

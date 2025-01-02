@@ -1,9 +1,9 @@
 import { NgFor } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrderFormService } from '../../../service/order-form-service/order-form.service';
 import { MenuService } from '../../../service/menu-service/menu.service';
 import { OrderService } from '../../../service/order-service/order.service';
+import { OrderComponent } from '../../order/order.component';
 
 @Component({
   selector: 'app-order-form',
@@ -16,11 +16,11 @@ export class OrderFormComponent {
   @Output() closeEvent = new EventEmitter();
   @Output() submitEvent = new EventEmitter();
 
-  menuItems: Array<{ id: number, name: string, price: number, pic_url: string }> = []
+  menuItems: Array<{ id: number, name: string, price: number, pic_url: string }> = [];
   menu: any;
   constructor(private elementRef: ElementRef,
     private changeDetectorRef: ChangeDetectorRef,
-    private orderFormService: OrderFormService,
+    private orderComponent: OrderComponent,
     private orderService: OrderService,
     private menuService: MenuService
   ) {
@@ -41,10 +41,11 @@ export class OrderFormComponent {
     console.log(this.orderFG.value)
     let order: any = this.orderFG.value
     this.orderService.createOrder(this.orderFG.value).subscribe(data => {
-      console.log(data)
+      console.log(data);
       if (data) {
         order.id = data.data
-        this.orderService.setOrderDataItems([...this.orderService.orderDataItems, order])
+        this.orderService.setOrderDataItems([...this.orderService.orderDataItems, order]);
+        this.orderComponent.changeDetect();
       }
     })
     this.elementRef.nativeElement.remove();

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrderService } from '../../service/order-service/order.service';
 import { NgClass } from '@angular/common';
+import { OrderComponent } from '../order/order.component';
 
 @Component({
   selector: 'app-order-card',
@@ -19,7 +20,7 @@ export class OrderCardComponent {
 
   @Output() OrderData = new EventEmitter<any>()
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private orderComponent: OrderComponent,) { }
 
   Delivered(id: number) {
     this.orderService.orderUpdate(id, { status: 'delivered' }).subscribe(data => {
@@ -29,6 +30,7 @@ export class OrderCardComponent {
         const data = this.orderService.orderDataItems[index];
         data.status = 'delivered';
         if (index !== -1) { this.orderService.orderDataItems[index] = data; };
+        this.orderComponent.changeDetect();
       }
     })
   }

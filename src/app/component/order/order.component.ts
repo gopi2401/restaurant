@@ -6,11 +6,12 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgClass } from '@angular/common';
 import { SearchOrdersPipe } from "../../pipe/searchOrders-pipe/search-orders.pipe";
 import { FormsModule } from '@angular/forms';
+import { FilterOrdersPipe } from "../../pipe/filterOrders-pipe/filter-orders.pipe";
 
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [OrderCardComponent, NgbDropdownModule, NgClass, FormsModule, SearchOrdersPipe],
+  imports: [OrderCardComponent, NgbDropdownModule, NgClass, FormsModule, SearchOrdersPipe, FilterOrdersPipe],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
@@ -18,11 +19,9 @@ export class OrderComponent implements OnInit {
   Orders: any[] = []
   table: boolean = false;
   searchString = '';
+  filterpending: boolean = true
+  filterdelivered: boolean = false
 
-  filter: OrderFilter = {
-    pending: true,
-    delivered: false
-  }
   constructor(private orderService: OrderService, private orderFormService: OrderFormService,
     private changeDetectorRef: ChangeDetectorRef
   ) {
@@ -34,7 +33,6 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.GetOrderAndItem().subscribe(data => {
       this.orderService.setOrderDataItems(data.data);
-      this.filterFn()
     });
   };
 
@@ -44,14 +42,6 @@ export class OrderComponent implements OnInit {
     // if (index !== -1) { this.menuService.getMenu[index] = data; };
   }
 
-  filterFn() {
-    let values = this.orderService.orderDataItems;
-    if (this.filter.pending && !this.filter.delivered) { this.Orders = values.filter((item: any) => (item.status === 'pending')); } else
-      if (this.filter.delivered && !this.filter.pending) { this.Orders = values.filter((item: any) => (item.status === 'delivered')); }
-      else {
-        this.Orders = this.orderService.orderDataItems;
-      }
-  }
 
   iterateProduct(data: any) {
     let product = '';
@@ -77,7 +67,7 @@ export class OrderComponent implements OnInit {
   }
 
   changeDetect() {
-    this.changeDetectorRef.detectChanges()
+    this.changeDetectorRef.detectChanges();
   }
 
 }
