@@ -24,6 +24,12 @@ export class OrderCardComponent {
   Delivered(id: number) {
     this.orderService.orderUpdate(id, { status: 'delivered' }).subscribe(data => {
       console.log(data);
+      if (data.message === "Order updated successfully") {
+        var index = this.orderService.orderDataItems.findIndex((item) => item.id === id);
+        const data = this.orderService.orderDataItems[index];
+        data.status = 'delivered';
+        if (index !== -1) { this.orderService.orderDataItems[index] = data; };
+      }
     })
   }
 }

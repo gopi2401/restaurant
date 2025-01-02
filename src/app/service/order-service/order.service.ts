@@ -32,27 +32,19 @@ export class OrderService {
 
   createOrder(payload: any): Observable<any> {
     const headers = this.loginService.getTokenHeader;
-    const response = this.httpClient.post<any>("http://localhost:3000/v1/order", payload, { headers });
-    response.subscribe(data => {
-      if (data) {
-        payload.id = data.data
-        this.setOrderDataItems([payload, ...this.orderDataItems])
-      }
-    })
-    return response;
+    return this.httpClient.post<any>("http://localhost:3000/v1/order", payload, { headers });
   }
 
   orderUpdate(id: number, payload: any): Observable<any> {
     const headers = this.loginService.getTokenHeader;
-    const response = this.httpClient.put<any>(`http://localhost:3000/v1/order/${id}`, payload, { headers });
-    response.subscribe(data => {
-      if (data.message === "Order updated successfully") {
-        var index = this.orderDataItems.findIndex((item) => item.id === id);
-        const data = this.orderDataItems[index];
-        data.status = payload.status;
-        if (index !== -1) { this.orderDataItems[index] = data; };
-      }
-    });
-    return response;
+    return this.httpClient.put<any>(`http://localhost:3000/v1/order/${id}`, payload, { headers });
+    // response.subscribe(data => {
+    //   if (data.message === "Order updated successfully") {
+    //     var index = this.orderDataItems.findIndex((item) => item.id === id);
+    //     const data = this.orderDataItems[index];
+    //     data.status = payload.status;
+    //     if (index !== -1) { this.orderDataItems[index] = data; };
+    //   }
+    // });
   }
 }

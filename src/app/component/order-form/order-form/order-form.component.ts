@@ -39,8 +39,13 @@ export class OrderFormComponent {
     this.orderFG.controls.price.setValue(this.orderAmount);
     this.orderFG.controls.quantity.setValue(this.orderQuantity)
     console.log(this.orderFG.value)
+    let order: any = this.orderFG.value
     this.orderService.createOrder(this.orderFG.value).subscribe(data => {
       console.log(data)
+      if (data) {
+        order.id = data.data
+        this.orderService.setOrderDataItems([...this.orderService.orderDataItems, order])
+      }
     })
     this.elementRef.nativeElement.remove();
     this.submitEvent.emit();
