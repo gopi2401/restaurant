@@ -3,7 +3,7 @@
   href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
 />
 
-<div class="md:hidden fixed z-50 top-3 left-2">
+<div class="md:hidden fixed z-[51] top-3 left-2">
   <button
     (click)="sidebarShow = !sidebarShow"
     class="bg-bg-white hover:bg-gray-100 text-white font-bold py-2 px-2 rounded-lg transition-all ease-in-out duration-150 {{
@@ -16,14 +16,18 @@
     ></span>
   </button>
 </div>
-<div class="">
+<div class="z-50">
   <div
     class="flex md:relative absolute flex-col w-56 min-h-screen bg-white rounded-r-3xl overflow-hidden md:translate-x-0 transition ease-in-out delay-150 {{
       sidebarShow ? 'translate-x-0' : '-translate-x-56'
     }}"
   >
     <div class="flex items-center justify-center h-20 shadow-md">
-      <h1 class="text-3xl uppercase text-indigo-500">Logo</h1>
+      <img
+        src="icons/icon_512.png"
+        alt="Menu Image"
+        class="w-20 h-20 object-cover"
+      />
     </div>
     <ul class="flex flex-col py-4">
       <li>
@@ -85,9 +89,9 @@
         >
           <span
             class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-chat"></i
+            ><i class="bx bx-chart"></i
           ></span>
-          <span class="text-sm font-medium">Chat</span>
+          <span class="text-sm font-medium">Chart</span>
         </a>
       </li>
       <li>

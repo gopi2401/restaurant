@@ -72,11 +72,19 @@ export class ExpensesComponent {
       if (this.product.title === 'Add Product') {
         this.expenseService.createExpense(expense).subscribe(data => {
           console.log(data);
+          if (data) {
+            expense.id = data.data;
+            this.ExpensesData = [...this.ExpensesData, expense]
+          }
           this.modalVisible = false;
         });
       } else if (this.product.title === 'Edit Product') {
         this.expenseService.editExpense(expense.id, expense).subscribe(data => {
           console.log(data);
+          if (data) {
+            const index = this.ExpensesData.findIndex((item) => item.id === data.id)
+            if (index !== -1) { this.ExpensesData[index] = expense; };
+          };
           this.modalVisible = false;
         })
       }
@@ -86,6 +94,10 @@ export class ExpensesComponent {
   deleteExpense() {
     this.expenseService.deleteExpense(this.deleteId).subscribe(data => {
       console.log(data);
+      if (data) {
+        const index = this.ExpensesData.findIndex((item) => item.id === this.deleteId)
+        if (index !== -1) { this.ExpensesData.splice(index, 1); }
+      }
       this.deleteModal();
     })
   }

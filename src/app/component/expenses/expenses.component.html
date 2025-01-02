@@ -1,11 +1,10 @@
 <!-- this component global css set width 100% -->
-<section class="bg-white p-2 sm:p-6 rounded-lg shadow-md mt-6">
+<section class="bg-white p-2 sm:p-6 min-h-screen mt-6">
   <!-- Header -->
-  <!-- <header class="flex justify-between items-center py-4"> -->
-  <h1 class="text-2xl font-bold text-gray-800">Expenses</h1>
-  <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Logout</button> -->
-  <!-- </header> -->
-
+  <header class="flex justify-between items-center py-4">
+    <h1 class="text-2xl font-bold text-gray-800">Expenses</h1>
+    <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Logout</button> -->
+  </header>
   <!-- Add Product Button -->
   <div class="mb-6 w-full flex justify-end">
     <button
@@ -52,19 +51,19 @@
       <tbody class="divide-y divide-gray-200">
         @for (expense of ExpensesData; track $index) {
         <tr class="hover:bg-gray-100">
-          <td class="px-6 py-4">
+          <td class="sm:px-6 sm:py-4">
             <img
               src="{{ expense.pic_url }}"
               alt="Expense Image"
-              class="w-12 h-12 object-cover rounded-md shadow"
+              class="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-md shadow"
             />
           </td>
-          <td class="px-6 py-4 text-gray-800 font-medium">
+          <td class="sm:px-6 sm:py-4 text-gray-800 font-medium">
             {{ expense.name }}
           </td>
-          <td class="px-4 py-2">{{ expense.category }}</td>
-          <td class="px-6 py-4 text-gray-800">₹{{ expense.price }}</td>
-          <td class="px-4 py-2">
+          <td class="sm:px-4 sm:py-2">{{ expense.category }}</td>
+          <td class="sm:px-6 sm:py-4 text-gray-800">₹{{ expense.price }}</td>
+          <td class="sm:px-4 sm:py-2">
             <button
               class="flex flex-row items-center hover:underline"
               (click)="openEditProductModal(expense)"
