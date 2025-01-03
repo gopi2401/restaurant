@@ -23,7 +23,7 @@
     }
   ],
   "id": "/dashboard",
-  "start_url": "/dashboard",
+  "start_url": "/restaurant/dashboard",
   "scope": "./",
   "display": "standalone",
   "theme_color": "#000000",
