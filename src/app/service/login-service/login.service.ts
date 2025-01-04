@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-
   private token = new BehaviorSubject('');
   getTokenFu = this.token.asObservable();
 

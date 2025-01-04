@@ -4,6 +4,7 @@ import { NotificationComponent } from "../notification/notification.component";
 import { Title } from '@angular/platform-browser';
 import { OrderFormService } from '../../service/order-form-service/order-form.service';
 import { DashboardService } from '../../service/dashboard-service/dashboard.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +17,8 @@ export class DashboardComponent {
   totalOrder: number
   totalQuantity: number
   totalPrice: number
-  constructor(private title: Title, private orderFormService: OrderFormService, private dashboardService: DashboardService) {
+  constructor(private title: Title, private orderFormService: OrderFormService, private dashboardService: DashboardService, private appComponent: AppComponent) {
+    appComponent.isLogin = false;
     this.title.setTitle('Dashboard-Restaurant');
     this.dashboardService.getOrderCount().subscribe(data => {
       this.totalOrder = data.data.orderCount;

@@ -4,6 +4,7 @@ import { Title } from "@angular/platform-browser";
 import { Router } from '@angular/router';
 
 import { LoginService } from '../../../../service/login-service/login.service';
+import { AppComponent } from '../../../../app.component';
 
 @Component({
   selector: 'app-login',
@@ -18,13 +19,20 @@ export class LoginComponent {
 
   constructor(private title: Title, private formBuilder: FormBuilder,
     private LoginService: LoginService,
-    private router: Router) {
+    private router: Router,
+    private appComponent: AppComponent) {
     this.title.setTitle('login-Restaurant');
+
+    if (localStorage.getItem('accessToken') && localStorage.getItem('user')) {
+      this.router.navigate(['/dashboard']);
+    } else {
+      appComponent.isLogin = true;
+    }
 
     this.loginForm = this.formBuilder.group({
       phone: null,
       password: null
-    })
+    });
   }
 
   submit() {

@@ -174,25 +174,39 @@
       <table class="min-w-full bg-white">
         <thead class="bg-gray-200">
           <tr>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Id
             </th>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Customer Name
             </th>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Product
             </th>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Quantity
             </th>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Price
             </th>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Status
             </th>
-            <th class="px-6 py-3 text-left text-gray-700 text-sm font-medium">
+            <th
+              class="px-1 py-2 sm:px-6 sm:py-3 text-left text-gray-700 text-sm font-medium"
+            >
               Actions
             </th>
           </tr>
@@ -201,16 +215,18 @@
           @for (item of Orders |searchOrders: searchString| filterOrders:
           {pending:filterpending,delivered: filterdelivered}; track $index) {
           <tr class="hover:bg-gray-100">
-            <td class="px-6 py-4 text-gray-800 font-medium">#{{ item.id }}</td>
-            <td class="px-6 py-4 text-gray-800">
+            <td class="sm:px-6 sm:py-4 text-gray-800 font-medium">
+              #{{ item.id }}
+            </td>
+            <td class="sm:px-6 sm:py-4 text-gray-800 font-medium">
               {{ item.customer_name }}
             </td>
             <td class="px-6 py-4 text-gray-800">
               {{ iterateProduct(item.order_items || []) }}
             </td>
-            <td class="px-6 py-4 text-gray-800">{{ item.quantity }}</td>
-            <td class="px-6 py-4 text-gray-800">₹{{ item.price }}</td>
-            <td class="px-6 py-4 text-gray-800">
+            <td class="sm:px-6 sm:py-4 text-gray-800">{{ item.quantity }}</td>
+            <td class="sm:px-6 sm:py-4 text-gray-800">₹{{ item.price }}</td>
+            <td class="sm:px-6 sm:py-4 text-gray-800">
               <span
                 [ngClass]="{
                   'text-yellow-800 bg-yellow-100 dark:bg-yellow-700 dark:text-yellow-200':
@@ -223,7 +239,7 @@
                 {{ item.status }}
               </span>
             </td>
-            <td class="px-6 py-4">
+            <td class="sm:px-6 sm:py-4">
               <button
                 class="flex flex-row items-center font-medium text-yellow-600 dark:text-red-500 hover:underline"
               >
