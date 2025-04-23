@@ -1,139 +1,144 @@
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-/>
+<div class="flex">
+  <div>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+    />
 
-<div class="md:hidden fixed z-[51] top-3 left-2">
-  <button
-    (click)="sidebarShow = !sidebarShow"
-    class="bg-bg-white hover:bg-gray-100 text-white font-bold py-2 px-2 rounded-lg transition-all ease-in-out duration-150 {{
-      sidebarShow ? '' : 'shadow-lg'
-    }}"
-  >
-    <span
-      class="inline-flex items-center justify-center h-6 w-6 text-lg text-gray-400"
-      ><i class="bx {{ sidebarShow ? 'bx-x' : 'bx-menu' }}"></i
-    ></span>
-  </button>
-</div>
-<div class="">
-  <div
-    class="flex md:relative z-[50] absolute flex-col w-56 min-h-screen bg-white rounded-r-3xl overflow-hidden md:translate-x-0 transition ease-in-out delay-150 {{
-      sidebarShow ? 'translate-x-0' : '-translate-x-56'
-    }}"
-  >
-    <div class="flex items-center justify-center h-20 shadow-md">
-      <img
-        src="icons/icon_512.png"
-        alt="Menu Image"
-        class="w-20 h-20 object-cover"
-      />
+    <div class="md:hidden fixed z-[51] top-3 left-2">
+      <button
+        (click)="sidebarShow = !sidebarShow"
+        class="bg-bg-white hover:bg-gray-100 text-white font-bold py-2 px-2 rounded-lg transition-all ease-in-out duration-150 {{
+          sidebarShow ? '' : 'shadow-lg'
+        }}"
+      >
+        <span
+          class="inline-flex items-center justify-center h-6 w-6 text-lg text-gray-400"
+          ><i class="bx {{ sidebarShow ? 'bx-x' : 'bx-menu' }}"></i
+        ></span>
+      </button>
     </div>
-    <ul class="flex flex-col py-4">
-      <li>
-        <a
-          (click)="sidebarShow = !sidebarShow"
-          routerLink="/dashboard"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-home"></i
-          ></span>
-          <span class="text-sm font-medium">Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a
-          (click)="sidebarShow = !sidebarShow"
-          routerLink="/orders"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-cart"></i
-          ></span>
-          <span class="text-sm font-medium">Orders</span>
-        </a>
-      </li>
-      <li>
-        <a
-          (click)="sidebarShow = !sidebarShow"
-          routerLink="/menus"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-drink"></i
-          ></span>
-          <span class="text-sm font-medium">Menu</span>
-        </a>
-      </li>
-      <li>
-        <a
-          (click)="sidebarShow = !sidebarShow"
-          routerLink="/expenses"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-shopping-bag"></i
-          ></span>
-          <span class="text-sm font-medium">Expenses</span>
-        </a>
-      </li>
-      <li>
-        <a
-          routerLink="/chart"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-chart"></i
-          ></span>
-          <span class="text-sm font-medium">Chart</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-user"></i
-          ></span>
-          <span class="text-sm font-medium">Profile</span>
-        </a>
-      </li>
-      <li>
-        <a
-          href="#"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-bell"></i
-          ></span>
-          <span class="text-sm font-medium">Notifications</span>
-          <span
-            class="ml-auto mr-6 text-sm bg-red-100 rounded-full px-3 py-px text-red-500"
-            >5</span
-          >
-        </a>
-      </li>
-      <li>
-        <a
-          (click)="logout()"
-          class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
-        >
-          <span
-            class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
-            ><i class="bx bx-log-out"></i
-          ></span>
-          <span class="text-sm font-medium">Logout</span>
-        </a>
-      </li>
-    </ul>
+    <div class="">
+      <div
+        class="flex md:relative z-[50] absolute flex-col w-56 min-h-screen bg-white rounded-r-3xl overflow-hidden md:translate-x-0 transition ease-in-out delay-150 {{
+          sidebarShow ? 'translate-x-0' : '-translate-x-56'
+        }}"
+      >
+        <div class="flex items-center justify-center h-20 shadow-md">
+          <img
+            src="icons/icon_512.png"
+            alt="Menu Image"
+            class="w-20 h-20 object-cover"
+          />
+        </div>
+        <ul class="flex flex-col py-4">
+          <li>
+            <a
+              (click)="sidebarShow = !sidebarShow"
+              routerLink="/dashboard"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-home"></i
+              ></span>
+              <span class="text-sm font-medium">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a
+              (click)="sidebarShow = !sidebarShow"
+              routerLink="/orders"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-cart"></i
+              ></span>
+              <span class="text-sm font-medium">Orders</span>
+            </a>
+          </li>
+          <li>
+            <a
+              (click)="sidebarShow = !sidebarShow"
+              routerLink="/menus"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-drink"></i
+              ></span>
+              <span class="text-sm font-medium">Menu</span>
+            </a>
+          </li>
+          <li>
+            <a
+              (click)="sidebarShow = !sidebarShow"
+              routerLink="/expenses"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-shopping-bag"></i
+              ></span>
+              <span class="text-sm font-medium">Expenses</span>
+            </a>
+          </li>
+          <li>
+            <a
+              routerLink="/chart"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-chart"></i
+              ></span>
+              <span class="text-sm font-medium">Chart</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-user"></i
+              ></span>
+              <span class="text-sm font-medium">Profile</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-bell"></i
+              ></span>
+              <span class="text-sm font-medium">Notifications</span>
+              <span
+                class="ml-auto mr-6 text-sm bg-red-100 rounded-full px-3 py-px text-red-500"
+                >5</span
+              >
+            </a>
+          </li>
+          <li>
+            <a
+              (click)="logout()"
+              class="flex flex-row items-center h-12 transform hover:translate-x-2 transition-transform ease-in duration-200 text-gray-500 hover:text-gray-800"
+            >
+              <span
+                class="inline-flex items-center justify-center h-12 w-12 text-lg text-gray-400"
+                ><i class="bx bx-log-out"></i
+              ></span>
+              <span class="text-sm font-medium">Logout</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
+  <router-outlet></router-outlet>
 </div>
