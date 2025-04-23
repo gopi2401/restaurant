@@ -1,12 +1,11 @@
-<!-- this component global css set width 100% -->
-<section class="bg-white p-2 sm:p-6 min-h-screen mt-6">
+<section class="bg-white">
   <!-- Header -->
-  <header class="flex justify-between items-center py-4">
+  <header class="flex justify-between items-center">
     <h1 class="text-2xl font-bold text-gray-800">Expenses</h1>
     <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Logout</button> -->
   </header>
   <!-- Add Product Button -->
-  <div class="mb-6 w-full flex justify-end">
+  <div class="w-full flex justify-end">
     <button
       class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600"
       (click)="openAddProductModal()"
@@ -102,86 +101,6 @@
     <app-menu-form (menuDataNew)="(null)" [editData]="null"></app-menu-form>
     }
   </div>
-
-  <!-- Expense Categories -->
-  <!-- <section class="bg-white p-6 rounded-lg shadow-md mt-6">
-      <h2 class="text-lg font-semibold mb-4">Expense Categories</h2>
-      <table class="min-w-full table-auto">
-        <thead>
-          <tr class="bg-gray-200">
-            <th class="px-4 py-2 text-left">Expense Name</th>
-            <th class="px-4 py-2 text-left">Amount</th>
-            <th class="px-4 py-2 text-left">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b">
-            <td class="px-4 py-2">Equipment Expenses</td>
-            <td class="px-4 py-2">$3000</td>
-            <td class="px-4 py-2">
-              <button
-                class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-          <tr class="border-b">
-            <td class="px-4 py-2">Labor Costs</td>
-            <td class="px-4 py-2">$2000</td>
-            <td class="px-4 py-2">
-              <button
-                class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-          <tr class="border-b">
-            <td class="px-4 py-2">Utility Costs</td>
-            <td class="px-4 py-2">$500</td>
-            <td class="px-4 py-2">
-              <button
-                class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-          <tr class="border-b">
-            <td class="px-4 py-2">Rent</td>
-            <td class="px-4 py-2">$1000</td>
-            <td class="px-4 py-2">
-              <button
-                class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
-              >
-                Edit
-              </button>
-              <button
-                class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </section> -->
 </section>
 
 <!-- Add/Edit Product Modal (Hidden by Default) -->

@@ -1,11 +1,10 @@
-<!-- this component global css set width 100% -->
-<section class="bg-white min-h-screen p-2 sm:p-6 mt-6 overflow-y-auto overflow-x-hidden">
+<section class="bg-white">
   <!-- Header -->
-  <header class="flex justify-between items-center py-4">
+  <header class="flex justify-between items-center">
     <h1 class="text-2xl font-bold text-gray-800">Menu List</h1>
     <!-- <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Logout</button> -->
   </header>
-  <div class="md:mb-2 flex w-full justify-end p-4">
+  <div class="flex w-full justify-end">
     <button
       (click)="openMenuModal()"
       class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
@@ -13,8 +12,8 @@
       Add Menu
     </button>
   </div>
-  <div class="overflow-hidden rounded-lg shadow">
-    <table class="min-w-full bg-white table-auto">
+  <div class="rounded-lg shadow w-full">
+    <table class=" w-full bg-white table-auto">
       <thead class="bg-gray-200">
         <tr>
           <th
